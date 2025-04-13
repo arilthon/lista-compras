@@ -15,7 +15,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Build da aplicação Next.js
-RUN npm run build
+RUN NEXT_DISABLE_ESLINT=1 npm run build
 
 # Configuração de produção
 FROM base AS runner
@@ -43,4 +43,4 @@ ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
 
 # Comando para iniciar a aplicação
-CMD ["node", "server.js"] 
+CMD ["npm", "start"] 

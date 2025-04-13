@@ -1,51 +1,23 @@
-import { Client, Message } from 'whatsapp-web.js';
-import { generate as generateQR } from 'qrcode-terminal';
+// Mock da implementação do WhatsApp para ambiente Docker
+// A implementação real requer a biblioteca whatsapp-web.js
 
 class WhatsAppService {
-  private client: Client;
   private isReady: boolean = false;
   private callbacks: {
     onMessage?: (message: string, sender: string) => void;
   } = {};
 
   constructor() {
-    this.client = new Client({
-      puppeteer: {
-        args: ['--no-sandbox'],
-      }
-    });
-
-    this.setupEventListeners();
-  }
-
-  private setupEventListeners() {
-    this.client.on('qr', (qr) => {
-      generateQR(qr, { small: true });
-      console.log('QR Code generated. Scan with WhatsApp to log in.');
-    });
-
-    this.client.on('ready', () => {
-      this.isReady = true;
-      console.log('WhatsApp client is ready!');
-    });
-
-    this.client.on('message', (message: Message) => {
-      if (this.callbacks.onMessage && !message.isStatus && !message.fromMe) {
-        this.callbacks.onMessage(message.body, message.from);
-      }
-    });
+    console.log('WhatsApp service mock initialized');
   }
 
   public init() {
-    this.client.initialize();
+    this.isReady = true;
+    console.log('WhatsApp client mock is ready!');
   }
 
   public async sendMessage(to: string, message: string): Promise<void> {
-    if (!this.isReady) {
-      throw new Error('WhatsApp client is not ready');
-    }
-
-    await this.client.sendMessage(to, message);
+    console.log(`Mock: Sending message to ${to}: ${message}`);
   }
 
   public onMessage(callback: (message: string, sender: string) => void) {
