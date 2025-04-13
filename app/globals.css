@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Base color palette */
+  --color-primary: 79, 70, 229; /* indigo-600 */
+  --color-primary-light: 165, 180, 252; /* indigo-300 */
+  --color-primary-dark: 55, 48, 163; /* indigo-800 */
+  
+  --color-secondary: 236, 72, 153; /* pink-500 */
+  --color-secondary-light: 249, 168, 212; /* pink-300 */
+  
+  --color-accent: 16, 185, 129; /* emerald-500 */
+  --color-accent-light: 110, 231, 183; /* emerald-300 */
+  
+  --color-warning: 245, 158, 11; /* amber-500 */
+  --color-error: 239, 68, 68; /* red-500 */
+  --color-success: 34, 197, 94; /* green-500 */
+  
+  --color-bg-primary: 250, 250, 252; /* Light background */
+  --color-bg-secondary: 243, 244, 246; /* Secondary background */
+  
+  --color-text-primary: 17, 24, 39; /* Dark text */
+  --color-text-secondary: 107, 114, 128; /* Medium gray text */
+  --color-text-tertiary: 156, 163, 175; /* Light gray text */
+  
+  /* Gradient colors */
+  --gradient-start: 238, 242, 255; /* indigo-50 */
+  --gradient-end: 224, 231, 255; /* indigo-100 */
+  
+  /* Theme colors */
+  --foreground-rgb: var(--color-text-primary);
+  --background-start-rgb: var(--gradient-start);
+  --background-end-rgb: var(--gradient-end);
+  
+  /* Card styling */
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --card-border-radius: 0.75rem;
+  --transition-speed: 0.2s;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg-primary: 15, 23, 42; /* slate-900 */
+    --color-bg-secondary: 30, 41, 59; /* slate-800 */
+    
+    --color-text-primary: 248, 250, 252; /* slate-50 */
+    --color-text-secondary: 203, 213, 225; /* slate-300 */
+    --color-text-tertiary: 148, 163, 184; /* slate-400 */
+    
+    /* Gradient colors for dark mode */
+    --gradient-start: 15, 23, 42; /* slate-900 */
+    --gradient-end: 30, 41, 59; /* slate-800 */
+    
+    --foreground-rgb: var(--color-text-primary);
+    --background-start-rgb: var(--gradient-start);
+    --background-end-rgb: var(--gradient-end);
+  }
+}
+
+body {
+  color: rgb(var(--color-text-primary));
+  background: linear-gradient(
+      to bottom,
+      rgba(var(--gradient-start), 0.8),
+      rgba(var(--gradient-end), 1)
+    ),
+    url('/bg-pattern.svg');
+  background-size: cover;
+  min-height: 100vh;
+}
+
+/* Modern Card Design */
+.modern-card {
+  @apply rounded-lg bg-white shadow-lg border border-gray-100 overflow-hidden transition-all duration-300;
+}
+
+.modern-card:hover {
+  @apply shadow-xl transform translate-y-[-2px];
+}
+
+.gradient-bg {
+  @apply bg-gradient-to-r from-indigo-500 to-purple-600 text-white;
+}
+
+.gradient-bg-secondary {
+  @apply bg-gradient-to-r from-pink-500 to-rose-500 text-white;
+}
+
+.gradient-bg-success {
+  @apply bg-gradient-to-r from-emerald-400 to-teal-500 text-white;
+}
+
+/* Buttons */
+.btn-primary {
+  @apply px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+}
+
+.btn-secondary {
+  @apply px-4 py-2 bg-pink-500 text-white rounded-lg shadow hover:bg-pink-600 transition-colors focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2;
+}
+
+.btn-accent {
+  @apply px-4 py-2 bg-emerald-500 text-white rounded-lg shadow hover:bg-emerald-600 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2;
+}
+
+/* Melhorias de tipografia */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  font-size: 1.875rem; /* 30px */
+  line-height: 2.25rem; /* 36px */
+}
+
+h2 {
+  font-size: 1.5rem; /* 24px */
+  line-height: 2rem; /* 32px */
+}
+
+h3 {
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.75rem; /* 28px */
+}
+
+p, span, button, input, select, textarea {
+  letter-spacing: -0.01em;
+}
+
+button, a {
+  font-weight: 600;
+}
+
+/* Melhorias na nitidez do texto */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Animation utilities */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Hover card animation */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
